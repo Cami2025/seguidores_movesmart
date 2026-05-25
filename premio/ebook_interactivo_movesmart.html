@@ -108,11 +108,16 @@
       position:relative;
       min-height:310px;
       padding:34px;
-      border:1px solid var(--border);
+      border:1px solid rgba(255,75,24,.38);
       border-radius:var(--radius);
       background:
+        linear-gradient(90deg, rgba(5,4,8,.92) 0%, rgba(8,6,12,.72) 44%, rgba(8,6,12,.28) 100%),
         linear-gradient(145deg, rgba(255,255,255,.08), rgba(255,255,255,.015)),
+        var(--card-img),
         var(--card);
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
       box-shadow:var(--shadow);
       backdrop-filter:blur(14px);
       overflow:hidden;
@@ -124,11 +129,18 @@
       inset:0;
       border-radius:inherit;
       pointer-events:none;
-      background:radial-gradient(circle at 10% 0%, rgba(255,75,24,.20), transparent 32%);
-      opacity:.85;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(255,75,24,.22), transparent 32%),
+        linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.34));
+      opacity:.95;
     }
 
     .card > *{position:relative; z-index:1}
+
+    .contenedor-1{--card-img:url("imagenes/contenedor-1.webp");}
+    .contenedor-2{--card-img:url("imagenes/contenedor-2.webp");}
+    .contenedor-3{--card-img:url("imagenes/contenedor-3.webp");}
+    .contenedor-4{--card-img:url("imagenes/contenedor-4.webp");}
 
     .icon{
       width:68px;
@@ -251,8 +263,13 @@
 
     .cta-card{
       background:
+        linear-gradient(90deg, rgba(5,4,8,.94) 0%, rgba(8,6,12,.68) 46%, rgba(8,6,12,.20) 100%),
         linear-gradient(135deg, rgba(255,75,24,.13), rgba(255,255,255,.02)),
+        var(--card-img),
         var(--card-2);
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
     }
 
     .path{
@@ -356,6 +373,11 @@
 
     @media(max-width:820px){
       .page{width:min(100% - 22px, 720px); padding-top:18px}
+      .card{background-position:center;}
+      .contenedor-1{background-position:center;}
+      .contenedor-2{background-position:center right;}
+      .contenedor-3{background-position:center;}
+      .contenedor-4{background-position:center right;}
       .grid{grid-template-columns:1fr}
       .card{min-height:auto; padding:26px}
       .options{grid-template-columns:1fr}
@@ -378,7 +400,7 @@
     </section>
 
     <section class="grid">
-      <article class="card">
+      <article class="card contenedor-1">
         <div class="icon">♡</div>
         <h2>¿Cómo te<br>sientes hoy?</h2>
         <p>Tu estado cambia cada día. El plan también.</p>
@@ -391,7 +413,7 @@
         </div>
       </article>
 
-      <article class="card">
+      <article class="card contenedor-2">
         <div class="icon">⌾</div>
         <h2>Explora<br>tu zona</h2>
         <p>Cada zona puede necesitar un enfoque distinto.</p>
@@ -403,10 +425,10 @@
           <button class="zone" data-title="Tobillo" data-text="El tobillo puede necesitar movilidad, estabilidad y seguridad al apoyar." data-list="Movilidad de tobillo|Equilibrio|Activación progresiva">Tobillo <span>›</span></button>
         </div>
 
-        <div class="body-map"></div>
+        <!-- La imagen de fondo del contenedor 2 ya incluye el cuerpo/zonas visuales -->
       </article>
 
-      <article class="card">
+      <article class="card contenedor-3">
         <div class="icon">☆</div>
         <h2>Lo importante</h2>
         <p>Dos personas con la misma lesión pueden necesitar caminos distintos.</p>
@@ -424,7 +446,7 @@
         </div>
       </article>
 
-      <article class="card cta-card">
+      <article class="card cta-card contenedor-4">
         <div class="path"></div>
         <div class="icon">⚑</div>
         <h2>Tu siguiente<br>paso</h2>
