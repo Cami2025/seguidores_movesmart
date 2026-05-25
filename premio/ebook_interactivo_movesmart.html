@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MoveSmart | Ebook Interactivo</title>
+  <style>
+    :root{
+      --bg:#09060d;
+      --card:rgba(12,10,16,.72);
+      --card-2:rgba(18,14,22,.82);
+      --border:rgba(255,255,255,.14);
+      --text:#ffffff;
+      --muted:#cfc7d6;
+      --accent:#ff4b18;
+      --accent-2:#ff7a2f;
+      --radius:28px;
+      --shadow:0 26px 70px rgba(0,0,0,.55);
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family:Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color:var(--text);
+      background:#07050a;
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      background:
+        linear-gradient(180deg, rgba(5,4,8,.20), rgba(5,4,8,.92)),
+        radial-gradient(circle at 78% 15%, rgba(255,94,31,.22), transparent 24%),
+        radial-gradient(circle at 20% 85%, rgba(255,94,31,.16), transparent 28%),
+        url("imagenes/fondo-preview-rutina.webp") center center / cover no-repeat;
+      filter:saturate(1.08) brightness(.78);
+      z-index:-2;
+    }
+
+    body::after{
+      content:"";
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.22);
+      backdrop-filter:blur(1px);
+      z-index:-1;
+    }
+
+    .page{
+      width:min(1240px, calc(100% - 34px));
+      margin:0 auto;
+      padding:26px 0 34px;
+    }
+
+    .brand{
+      text-align:center;
+      margin:0 0 18px;
+      font-weight:950;
+      letter-spacing:-.07em;
+      font-size:clamp(2rem, 4vw, 3.15rem);
+      line-height:1;
+    }
+
+    .brand span{color:var(--accent)}
+
+    .hero{
+      text-align:center;
+      margin-bottom:26px;
+    }
+
+    .hero h1{
+      margin:0;
+      font-size:clamp(2.4rem, 5vw, 4.6rem);
+      line-height:1.02;
+      letter-spacing:-.06em;
+      font-weight:900;
+    }
+
+    .hero h1 span{color:var(--accent)}
+
+    .hero p{
+      margin:12px auto 0;
+      color:var(--muted);
+      font-size:clamp(1rem, 2vw, 1.35rem);
+    }
+
+    .mini-line{
+      width:54px;
+      height:4px;
+      margin:18px auto 0;
+      border-radius:999px;
+      background:var(--accent);
+      box-shadow:0 0 22px rgba(255,75,24,.7);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:20px;
+    }
+
+    .card{
+      position:relative;
+      min-height:310px;
+      padding:34px;
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      background:
+        linear-gradient(145deg, rgba(255,255,255,.08), rgba(255,255,255,.015)),
+        var(--card);
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(14px);
+      overflow:hidden;
+    }
+
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      border-radius:inherit;
+      pointer-events:none;
+      background:radial-gradient(circle at 10% 0%, rgba(255,75,24,.20), transparent 32%);
+      opacity:.85;
+    }
+
+    .card > *{position:relative; z-index:1}
+
+    .icon{
+      width:68px;
+      height:68px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      border:2px solid rgba(255,75,24,.62);
+      color:var(--accent);
+      font-size:2rem;
+      box-shadow:0 0 30px rgba(255,75,24,.24);
+      margin-bottom:20px;
+    }
+
+    .card h2{
+      margin:0 0 12px;
+      font-size:clamp(1.65rem, 3vw, 2.4rem);
+      line-height:1.06;
+      letter-spacing:-.045em;
+    }
+
+    .card p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.55;
+      font-size:1.05rem;
+    }
+
+    .options{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:30px;
+    }
+
+    .option, .zone{
+      border:1px solid rgba(255,255,255,.15);
+      background:rgba(0,0,0,.34);
+      border-radius:999px;
+      color:#fff;
+      padding:15px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      cursor:pointer;
+      transition:.22s ease;
+      font-weight:800;
+    }
+
+    .option:hover, .zone:hover{
+      border-color:rgba(255,75,24,.9);
+      transform:translateY(-2px);
+      box-shadow:0 12px 30px rgba(255,75,24,.18);
+    }
+
+    .zones{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:12px;
+      width:min(290px, 100%);
+      margin-left:auto;
+      margin-top:18px;
+    }
+
+    .body-map{
+      position:absolute;
+      right:18px;
+      bottom:0;
+      width:220px;
+      height:290px;
+      opacity:.95;
+      pointer-events:none;
+      background:
+        radial-gradient(circle at 56% 18%, rgba(255,75,24,.9) 0 7px, transparent 8px),
+        radial-gradient(circle at 50% 50%, rgba(255,75,24,.9) 0 7px, transparent 8px),
+        radial-gradient(circle at 54% 78%, rgba(255,75,24,.9) 0 7px, transparent 8px);
+      filter:drop-shadow(0 0 18px rgba(255,75,24,.5));
+    }
+
+    .body-map::before{
+      content:"";
+      position:absolute;
+      inset:20px 70px 0;
+      border:2px solid rgba(255,255,255,.28);
+      border-radius:55% 55% 42% 42%;
+      transform:skewX(-5deg);
+    }
+
+    .important{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:10px;
+      margin-top:26px;
+      text-align:center;
+    }
+
+    .mini{
+      padding:12px 6px;
+      border-right:1px solid rgba(255,255,255,.08);
+    }
+
+    .mini:last-child{border-right:0}
+
+    .mini strong{
+      display:block;
+      color:var(--accent);
+      font-size:1.6rem;
+      margin-bottom:6px;
+    }
+
+    .quote{
+      margin-top:26px;
+      padding:18px 22px;
+      border-radius:999px;
+      background:rgba(255,255,255,.045);
+      color:#fff;
+      line-height:1.5;
+    }
+
+    .cta-card{
+      background:
+        linear-gradient(135deg, rgba(255,75,24,.13), rgba(255,255,255,.02)),
+        var(--card-2);
+    }
+
+    .path{
+      position:absolute;
+      right:0;
+      bottom:0;
+      width:46%;
+      height:70%;
+      opacity:.42;
+      background:
+        radial-gradient(circle at 70% 20%, rgba(255,75,24,.8), transparent 6%),
+        linear-gradient(135deg, transparent 0 35%, rgba(255,75,24,.25) 36%, transparent 38% 100%);
+      clip-path:polygon(0 18%,100% 0,100% 100%,0 100%);
+    }
+
+    .btn{
+      margin-top:34px;
+      width:min(440px,100%);
+      border:0;
+      border-radius:18px;
+      padding:20px 24px;
+      background:linear-gradient(180deg, var(--accent-2), var(--accent));
+      color:#fff;
+      font-size:1.05rem;
+      font-weight:900;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:12px;
+      box-shadow:0 18px 42px rgba(255,75,24,.35);
+      transition:.22s ease;
+    }
+
+    .btn:hover{transform:translateY(-2px); filter:brightness(1.05)}
+
+    .footer{
+      text-align:center;
+      margin-top:28px;
+      color:var(--muted);
+      font-size:1.05rem;
+    }
+
+    .footer span{color:var(--accent); font-weight:900}
+
+    .modal{
+      position:fixed;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:22px;
+      background:rgba(0,0,0,.68);
+      backdrop-filter:blur(8px);
+      z-index:10;
+    }
+
+    .modal.active{display:flex}
+
+    .modal-box{
+      width:min(560px,100%);
+      border-radius:26px;
+      padding:30px;
+      background:
+        linear-gradient(145deg, rgba(255,255,255,.09), rgba(255,255,255,.025)),
+        rgba(14,10,17,.96);
+      border:1px solid rgba(255,255,255,.16);
+      box-shadow:0 30px 90px rgba(0,0,0,.6);
+    }
+
+    .modal-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:16px;
+    }
+
+    .modal h3{
+      margin:0 0 12px;
+      font-size:1.8rem;
+      letter-spacing:-.03em;
+    }
+
+    .modal p, .modal li{
+      color:var(--muted);
+      line-height:1.55;
+    }
+
+    .modal ul{padding-left:20px}
+
+    .close{
+      width:40px;
+      height:40px;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,.15);
+      background:rgba(255,255,255,.06);
+      color:#fff;
+      cursor:pointer;
+      font-size:1.2rem;
+    }
+
+    @media(max-width:820px){
+      .page{width:min(100% - 22px, 720px); padding-top:18px}
+      .grid{grid-template-columns:1fr}
+      .card{min-height:auto; padding:26px}
+      .options{grid-template-columns:1fr}
+      .zones{margin-left:0; width:100%}
+      .body-map{display:none}
+      .important{grid-template-columns:repeat(2,1fr)}
+      .mini:nth-child(2){border-right:0}
+      .hero h1{font-size:2.55rem}
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="brand">Move<span>Smart</span></div>
+
+    <section class="hero">
+      <h1>Rehabilitación <span>personalizada</span></h1>
+      <p>según tu estado, tu vida y tu objetivo.</p>
+      <div class="mini-line"></div>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <div class="icon">♡</div>
+        <h2>¿Cómo te<br>sientes hoy?</h2>
+        <p>Tu estado cambia cada día. El plan también.</p>
+
+        <div class="options">
+          <button class="option" data-title="Dolor hoy" data-text="Hoy tu cuerpo puede necesitar bajar carga, moverse con más calma y recuperar confianza." data-list="Movilidad suave|Ejercicios que no aumenten la molestia|Respiración y descarga de tensión">Dolor hoy <span>›</span></button>
+          <button class="option" data-title="Rigidez" data-text="La rigidez suele necesitar movimiento progresivo, sin forzar ni apurar el proceso." data-list="Movilidad guiada|Activación suave|Progresión gradual">Rigidez <span>›</span></button>
+          <button class="option" data-title="Me siento mejor, pero aún molesta" data-text="Es una buena señal. Aquí buscamos fortalecer y volver a movimientos reales sin irritar." data-list="Fuerza progresiva|Control del movimiento|Confianza al moverte">Me siento mejor <span>›</span></button>
+          <button class="option" data-title="Quiero volver al deporte" data-text="Volver al deporte requiere preparar fuerza, estabilidad e impacto de forma progresiva." data-list="Fuerza específica|Impacto gradual|Retorno seguro a tu actividad">Volver al deporte <span>›</span></button>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="icon">⌾</div>
+        <h2>Explora<br>tu zona</h2>
+        <p>Cada zona puede necesitar un enfoque distinto.</p>
+
+        <div class="zones">
+          <button class="zone" data-title="Hombro" data-text="El hombro suele necesitar control, movilidad y fuerza progresiva según tu molestia actual." data-list="Movilidad de hombro|Activación escapular|Progresión de carga">Hombro <span>›</span></button>
+          <button class="zone" data-title="Espalda" data-text="La espalda puede mejorar con movimiento dosificado, respiración y fortalecimiento gradual." data-list="Movilidad suave|Control de tronco|Tolerancia progresiva">Espalda <span>›</span></button>
+          <button class="zone" data-title="Rodilla" data-text="La rodilla muchas veces necesita recuperar confianza, fuerza y tolerancia a la carga." data-list="Fuerza de piernas|Control al subir o bajar|Progresión funcional">Rodilla <span>›</span></button>
+          <button class="zone" data-title="Tobillo" data-text="El tobillo puede necesitar movilidad, estabilidad y seguridad al apoyar." data-list="Movilidad de tobillo|Equilibrio|Activación progresiva">Tobillo <span>›</span></button>
+        </div>
+
+        <div class="body-map"></div>
+      </article>
+
+      <article class="card">
+        <div class="icon">☆</div>
+        <h2>Lo importante</h2>
+        <p>Dos personas con la misma lesión pueden necesitar caminos distintos.</p>
+
+        <div class="important">
+          <div class="mini"><strong>◷</strong>Tu tiempo</div>
+          <div class="mini"><strong>ϟ</strong>Tu energía</div>
+          <div class="mini"><strong>◎</strong>Tu objetivo</div>
+          <div class="mini"><strong>♙</strong>Tu estado actual</div>
+        </div>
+
+        <div class="quote">
+          No es una rutina genérica.<br>
+          Es tu plan, para tu vida real.
+        </div>
+      </article>
+
+      <article class="card cta-card">
+        <div class="path"></div>
+        <div class="icon">⚑</div>
+        <h2>Tu siguiente<br>paso</h2>
+        <p>Pequeños pasos. Elegidos para ti.</p>
+
+        <button class="btn" onclick="openModal('Orientación personalizada','Cuéntanos tu situación y podremos orientarte mejor según tu estado actual, tu objetivo y tu disponibilidad.','Evaluación inicial|Plan adaptado|Seguimiento progresivo')">
+          Quiero mi orientación personalizada <span>›</span>
+        </button>
+
+        <p style="margin-top:22px;font-size:.95rem">100% personalizado y basado en evidencia</p>
+      </article>
+    </section>
+
+    <div class="footer">
+      Avanza a tu ritmo. <span>Nosotros te acompañamos.</span>
+    </div>
+  </main>
+
+  <div class="modal" id="modal">
+    <div class="modal-box">
+      <div class="modal-top">
+        <div>
+          <h3 id="modalTitle">Título</h3>
+          <p id="modalText">Texto</p>
+        </div>
+        <button class="close" onclick="closeModal()">×</button>
+      </div>
+      <ul id="modalList"></ul>
+      <button class="btn" onclick="closeModal()">Entendido</button>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById("modal");
+    const title = document.getElementById("modalTitle");
+    const text = document.getElementById("modalText");
+    const list = document.getElementById("modalList");
+
+    function openModal(t, body, items){
+      title.textContent = t;
+      text.textContent = body;
+      list.innerHTML = "";
+      String(items).split("|").forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = item;
+        list.appendChild(li);
+      });
+      modal.classList.add("active");
+    }
+
+    function closeModal(){
+      modal.classList.remove("active");
+    }
+
+    document.querySelectorAll("[data-title]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        openModal(btn.dataset.title, btn.dataset.text, btn.dataset.list);
+      });
+    });
+
+    modal.addEventListener("click", (e) => {
+      if(e.target === modal) closeModal();
+    });
+  </script>
+</body>
+</html>
