@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -442,7 +444,7 @@
       position:absolute;
       left:var(--x);
       top:var(--y);
-      width:calc(var(--line) + 178px);
+      width:calc(100% - var(--x) - 18px);
       height:46px;
       transform:translateY(-50%);
       display:flex;
@@ -465,15 +467,16 @@
 
     .hotspot::before{
       content:"";
-      width:var(--line);
       height:2px;
-      background:linear-gradient(90deg, rgba(255,75,24,.95), rgba(255,75,24,.25));
+      background:linear-gradient(90deg, rgba(255,75,24,.95), rgba(255,75,24,.22));
       margin-left:8px;
-      flex:0 0 auto;
+      flex:1 1 auto;
+      min-width:18px;
     }
 
     .zone-label{
-      min-width:150px;
+      width:142px;
+      min-width:142px;
       border:1px solid rgba(255,75,24,.55);
       background:rgba(0,0,0,.44);
       color:#fff;
@@ -495,12 +498,14 @@
       box-shadow:0 0 28px rgba(255,75,24,.18);
     }
 
-    .hotspot-cervical{--x:48%; --y:16%; --line:135px;}
-    .hotspot-hombro{--x:55%; --y:26%; --line:118px;}
-    .hotspot-codo{--x:60%; --y:40%; --line:95px;}
-    .hotspot-lumbar{--x:52%; --y:53%; --line:135px;}
-    .hotspot-rodilla{--x:51%; --y:68%; --line:135px;}
-    .hotspot-tobillo{--x:37%; --y:84%; --line:210px;}
+    /* Posiciones ajustadas sobre la imagen del cuerpo */
+    .hotspot-cervical{--x:56%; --y:10%;}
+    .hotspot-hombro{--x:66%; --y:20%;}
+    .hotspot-codo{--x:72%; --y:34%;}
+    .hotspot-lumbar{--x:61%; --y:49%;}
+    .hotspot-cadera{--x:52%; --y:55%;}
+    .hotspot-rodilla{--x:59%; --y:70%;}
+    .hotspot-tobillo{--x:42%; --y:86%;}
 
     @media(max-width:820px){
       .page{width:min(100% - 22px, 720px); padding-top:18px}
@@ -587,6 +592,11 @@
           <div class="hotspot hotspot-lumbar">
             <span class="dot"></span>
             <button class="zone-label" data-title="Lumbar" data-text="Zona lumbar: suele responder bien a movimiento dosificado, control de tronco y fuerza progresiva." data-list="Movilidad lumbar suave|Control de tronco|Tolerancia progresiva">Lumbar <span>›</span></button>
+          </div>
+
+          <div class="hotspot hotspot-cadera">
+            <span class="dot"></span>
+            <button class="zone-label" data-title="Cadera" data-text="Cadera: puede requerir movilidad, activación de glúteos y control de pelvis antes de cargar más." data-list="Movilidad de cadera|Activación de glúteo medio|Control de pelvis|Progresión funcional">Cadera <span>›</span></button>
           </div>
 
           <div class="hotspot hotspot-rodilla">
