@@ -1,3 +1,7 @@
+
+
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -115,8 +119,8 @@
         linear-gradient(145deg, rgba(255,255,255,.08), rgba(255,255,255,.015)),
         var(--card-img),
         var(--card);
-      background-size:cover;
-      background-position:center;
+      background-size:cover, cover, contain, auto;
+      background-position:center, center, center bottom, center;
       background-repeat:no-repeat;
       box-shadow:var(--shadow);
       backdrop-filter:blur(14px);
@@ -487,13 +491,13 @@
 
     /* Posiciones ajustadas sobre la imagen del cuerpo */
     /* Posiciones de los contenedores al lado de cada articulación de la imagen */
-    .hotspot-cervical{--x:62%; --y:16%;}
-    .hotspot-hombro{--x:69%; --y:27%;}
-    .hotspot-codo{--x:76%; --y:40%;}
-    .hotspot-lumbar{--x:46%; --y:39%;}
-    .hotspot-cadera{--x:52%; --y:52%;}
-    .hotspot-rodilla{--x:56%; --y:65%;}
-    .hotspot-tobillo{--x:48%; --y:83%;}
+    .hotspot-cervical{--x:52%; --y:16%;}
+    .hotspot-hombro{--x:59%; --y:22%;}
+    .hotspot-codo{--x:62%; --y:36%;}
+    .hotspot-lumbar{--x:49%; --y:42%;}
+    .hotspot-cadera{--x:53%; --y:52%;}
+    .hotspot-rodilla{--x:55%; --y:63%;}
+    .hotspot-tobillo{--x:51%; --y:82%;}
 
     @media(max-width:820px){
       .page{width:min(100% - 22px, 720px); padding-top:18px}
@@ -511,20 +515,20 @@
       .mini:nth-child(2){border-right:0}
       .hero h1{font-size:2.55rem}
 
-      .zone-map-card{min-height:560px; background-size:cover; background-position:center; padding:22px;}
+      .zone-map-card{min-height:680px; background-size:cover, cover, contain, auto; background-position:center, center, center bottom, center; padding:22px;}
       .zone-map-head{width:46%;}
       .zone-map-help{left:22px; bottom:22px; width:190px; font-size:.9rem;}
       .hotspot{width:auto; height:42px; gap:10px;}
       .dot{display:none;}
       .hotspot::before{display:none;}
       .zone-label{min-width:118px; padding:10px 13px; font-size:.86rem;}
-      .hotspot-cervical{--x:47%; --y:17%;}
-      .hotspot-hombro{--x:53%; --y:28%;}
-      .hotspot-codo{--x:61%; --y:41%;}
-      .hotspot-lumbar{--x:44%; --y:48%;}
-      .hotspot-cadera{--x:48%; --y:58%;}
-      .hotspot-rodilla{--x:50%; --y:69%;}
-      .hotspot-tobillo{--x:35%; --y:84%;}
+      .hotspot-cervical{--x:50%; --y:17%;}
+      .hotspot-hombro{--x:56%; --y:25%;}
+      .hotspot-codo{--x:59%; --y:39%;}
+      .hotspot-lumbar{--x:47%; --y:43%;}
+      .hotspot-cadera{--x:51%; --y:54%;}
+      .hotspot-rodilla{--x:52%; --y:66%;}
+      .hotspot-tobillo{--x:48%; --y:84%;}
     }
   </style>
 </head>
