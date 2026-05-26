@@ -1,7 +1,5 @@
 
 
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -377,13 +375,13 @@
 
 
 
-    /* NUEVO: mapa corporal con contenedor en cada articulación */
+    /* NUEVO: mapa corporal con puntos + líneas + etiquetas */
     .zone-map-card{
-      min-height:620px;
+      min-height:520px;
       padding:28px;
       background:
-        linear-gradient(90deg, rgba(5,4,8,.76) 0%, rgba(8,6,12,.32) 45%, rgba(8,6,12,.08) 100%),
-        linear-gradient(145deg, rgba(255,255,255,.05), rgba(255,255,255,.01)),
+        linear-gradient(90deg, rgba(5,4,8,.94) 0%, rgba(8,6,12,.58) 46%, rgba(8,6,12,.08) 100%),
+        linear-gradient(145deg, rgba(255,255,255,.06), rgba(255,255,255,.01)),
         var(--card-img),
         var(--card);
       background-size:cover;
@@ -393,13 +391,13 @@
 
     .zone-map-card::before{
       background:
-        radial-gradient(circle at 55% 50%, rgba(255,75,24,.16), transparent 34%),
-        linear-gradient(180deg, rgba(0,0,0,.02), rgba(0,0,0,.34));
+        radial-gradient(circle at 9% 0%, rgba(255,75,24,.18), transparent 30%),
+        linear-gradient(180deg, rgba(0,0,0,.02), rgba(0,0,0,.28));
     }
 
     .zone-map-head{
-      width:35%;
-      max-width:235px;
+      width:36%;
+      max-width:250px;
     }
 
     .zone-map-head .icon{
@@ -446,59 +444,65 @@
       position:absolute;
       left:var(--x);
       top:var(--y);
-      transform:translate(-50%, -50%);
-      width:34px;
-      height:34px;
+      width:calc(var(--line) + 178px);
+      height:46px;
+      transform:translateY(-50%);
+      display:flex;
+      align-items:center;
       pointer-events:auto;
     }
 
-    /* Círculos eliminados: ahora solo quedan los contenedores sobre cada articulación */
-    .dot{display:none;}
+    .dot{
+      width:24px;
+      height:24px;
+      border-radius:50%;
+      border:2px solid var(--accent-2);
+      background:rgba(255,75,24,.32);
+      box-shadow:
+        0 0 0 6px rgba(255,75,24,.18),
+        0 0 0 12px rgba(255,75,24,.08),
+        0 0 22px rgba(255,75,24,.75);
+      flex:0 0 auto;
+    }
+
+    .hotspot::before{
+      content:"";
+      width:var(--line);
+      height:2px;
+      background:linear-gradient(90deg, rgba(255,75,24,.95), rgba(255,75,24,.25));
+      margin-left:8px;
+      flex:0 0 auto;
+    }
 
     .zone-label{
-      position:absolute;
-      left:var(--lx);
-      top:var(--ly);
-      width:max-content;
-      min-width:106px;
-      border:1.5px solid rgba(255,75,24,.9);
-      background:rgba(0,0,0,.70);
+      min-width:150px;
+      border:1px solid rgba(255,75,24,.55);
+      background:rgba(0,0,0,.44);
       color:#fff;
       border-radius:999px;
-      padding:10px 15px;
+      padding:12px 16px;
       display:flex;
       justify-content:space-between;
       align-items:center;
       gap:12px;
-      font-weight:950;
-      font-size:.92rem;
+      font-weight:900;
       cursor:pointer;
-      box-shadow:0 10px 28px rgba(0,0,0,.34), 0 0 20px rgba(255,75,24,.12);
-      backdrop-filter:blur(8px);
+      box-shadow:0 12px 34px rgba(0,0,0,.28);
       transition:.22s ease;
-      z-index:3;
-      white-space:nowrap;
     }
-
-    /* Líneas eliminadas */
-    .zone-label::before{display:none;}
 
     .zone-label:hover{
-      transform:scale(1.04);
-      border-color:#ff7a2f;
-      box-shadow:0 0 30px rgba(255,75,24,.28);
+      transform:translateX(4px);
+      border-color:rgba(255,75,24,.95);
+      box-shadow:0 0 28px rgba(255,75,24,.18);
     }
 
-    /* Posiciones: punto en la articulación + contenedor al lado de esa articulación */
-    .hotspot-cervical{--x:54%; --y:20%; --lx:28px; --ly:-36px; --line-x:-20px; --line-y:50%; --line-w:24px; --line-r:180deg;}
-    .hotspot-hombro{--x:69%; --y:28%; --lx:28px; --ly:-20px; --line-x:-22px; --line-y:50%; --line-w:26px; --line-r:180deg;}
-    .hotspot-codo{--x:76%; --y:42%; --lx:28px; --ly:-20px; --line-x:-22px; --line-y:50%; --line-w:26px; --line-r:180deg;}
-    .hotspot-mano{--x:79%; --y:57%; --lx:28px; --ly:-18px; --line-x:-22px; --line-y:50%; --line-w:26px; --line-r:180deg;}
-    .hotspot-lumbar{--x:55%; --y:52%; --lx:28px; --ly:-20px; --line-x:-22px; --line-y:50%; --line-w:26px; --line-r:180deg;}
-    .hotspot-cadera{--x:57%; --y:63%; --lx:28px; --ly:-18px; --line-x:-22px; --line-y:50%; --line-w:26px; --line-r:180deg;}
-    .hotspot-rodilla{--x:66%; --y:73%; --lx:26px; --ly:-18px; --line-x:-20px; --line-y:50%; --line-w:24px; --line-r:180deg;}
-    .hotspot-tobillo{--x:55%; --y:88%; --lx:26px; --ly:-18px; --line-x:-20px; --line-y:50%; --line-w:24px; --line-r:180deg;}
-    .hotspot-pie{--x:67%; --y:94%; --lx:26px; --ly:-18px; --line-x:-20px; --line-y:50%; --line-w:24px; --line-r:180deg;}
+    .hotspot-cervical{--x:48%; --y:16%; --line:135px;}
+    .hotspot-hombro{--x:55%; --y:26%; --line:118px;}
+    .hotspot-codo{--x:60%; --y:40%; --line:95px;}
+    .hotspot-lumbar{--x:52%; --y:53%; --line:135px;}
+    .hotspot-rodilla{--x:51%; --y:68%; --line:135px;}
+    .hotspot-tobillo{--x:37%; --y:84%; --line:210px;}
 
     @media(max-width:820px){
       .page{width:min(100% - 22px, 720px); padding-top:18px}
@@ -516,22 +520,18 @@
       .mini:nth-child(2){border-right:0}
       .hero h1{font-size:2.55rem}
 
-      .zone-map-card{min-height:680px; background-size:cover; background-position:center; padding:22px;}
-      .zone-map-head{width:48%;}
-      .zone-map-help{left:22px; bottom:22px; width:185px; font-size:.88rem;}
-      .hotspot{width:30px; height:30px;}
-      .dot{display:none;}
-      .zone-label{min-width:88px; padding:8px 11px; font-size:.78rem; gap:8px;}
-      .zone-label::before{display:none;}
-      .hotspot-cervical{--x:45%; --y:20%; --lx:22px; --ly:-32px;}
-      .hotspot-hombro{--x:58%; --y:29%; --lx:22px; --ly:-18px;}
-      .hotspot-codo{--x:66%; --y:43%; --lx:20px; --ly:-18px;}
-      .hotspot-mano{--x:69%; --y:58%; --lx:20px; --ly:-18px;}
-      .hotspot-lumbar{--x:47%; --y:53%; --lx:22px; --ly:-18px;}
-      .hotspot-cadera{--x:50%; --y:63%; --lx:22px; --ly:-18px;}
-      .hotspot-rodilla{--x:54%; --y:74%; --lx:22px; --ly:-18px;}
-      .hotspot-tobillo{--x:45%; --y:89%; --lx:22px; --ly:-18px;}
-      .hotspot-pie{--x:56%; --y:94%; --lx:22px; --ly:-18px;}
+      .zone-map-card{min-height:560px; background-size:cover; background-position:center; padding:22px;}
+      .zone-map-head{width:46%;}
+      .zone-map-help{left:22px; bottom:22px; width:190px; font-size:.9rem;}
+      .hotspot{width:calc(var(--line) + 128px); height:42px;}
+      .dot{width:20px; height:20px; box-shadow:0 0 0 5px rgba(255,75,24,.16),0 0 0 10px rgba(255,75,24,.07),0 0 18px rgba(255,75,24,.7);}
+      .zone-label{min-width:118px; padding:10px 13px; font-size:.86rem;}
+      .hotspot-cervical{--x:42%; --y:16%; --line:60px;}
+      .hotspot-hombro{--x:51%; --y:26%; --line:52px;}
+      .hotspot-codo{--x:59%; --y:40%; --line:34px;}
+      .hotspot-lumbar{--x:49%; --y:53%; --line:58px;}
+      .hotspot-rodilla{--x:48%; --y:68%; --line:58px;}
+      .hotspot-tobillo{--x:33%; --y:84%; --line:105px;}
     }
   </style>
 </head>
@@ -572,39 +572,33 @@
 
         <div class="zone-points" aria-label="Mapa interactivo de zonas del cuerpo">
           <div class="hotspot hotspot-cervical">
+            <span class="dot"></span>
             <button class="zone-label" data-title="Cervical" data-text="Zona cervical: puede relacionarse con rigidez, tensión o sobrecarga postural." data-list="Movilidad cervical suave|Respiración y descarga|Activación escapular liviana">Cervical <span>›</span></button>
           </div>
 
           <div class="hotspot hotspot-hombro">
+            <span class="dot"></span>
             <button class="zone-label" data-title="Hombro" data-text="Hombro: puede necesitar movilidad, control escapular y fuerza progresiva." data-list="Movilidad de hombro|Activación escapular|Progresión de carga">Hombro <span>›</span></button>
           </div>
 
           <div class="hotspot hotspot-codo">
+            <span class="dot"></span>
             <button class="zone-label" data-title="Codo" data-text="Codo: puede requerir descarga, movilidad y fortalecimiento gradual de antebrazo." data-list="Movilidad suave|Isométricos de antebrazo|Progresión de agarre">Codo <span>›</span></button>
           </div>
 
-          <div class="hotspot hotspot-mano">
-            <button class="zone-label" data-title="Mano" data-text="Mano y muñeca: puede requerir movilidad, control de agarre y progresión de carga." data-list="Movilidad de muñeca y dedos|Control del agarre|Fortalecimiento progresivo">Mano <span>›</span></button>
-          </div>
-
           <div class="hotspot hotspot-lumbar">
+            <span class="dot"></span>
             <button class="zone-label" data-title="Lumbar" data-text="Zona lumbar: suele responder bien a movimiento dosificado, control de tronco y fuerza progresiva." data-list="Movilidad lumbar suave|Control de tronco|Tolerancia progresiva">Lumbar <span>›</span></button>
           </div>
 
-          <div class="hotspot hotspot-cadera">
-            <button class="zone-label" data-title="Cadera" data-text="Cadera: puede requerir movilidad, activación de glúteos y control de pelvis antes de cargar más." data-list="Movilidad de cadera|Activación de glúteo medio|Control de pelvis|Progresión funcional">Cadera <span>›</span></button>
-          </div>
-
           <div class="hotspot hotspot-rodilla">
+            <span class="dot"></span>
             <button class="zone-label" data-title="Rodilla" data-text="Rodilla: puede necesitar recuperar fuerza, control y tolerancia a la carga." data-list="Fuerza de piernas|Control al subir o bajar|Progresión funcional">Rodilla <span>›</span></button>
           </div>
 
           <div class="hotspot hotspot-tobillo">
+            <span class="dot"></span>
             <button class="zone-label" data-title="Tobillo" data-text="Tobillo: puede necesitar movilidad, estabilidad y seguridad al apoyar." data-list="Movilidad de tobillo|Equilibrio|Activación progresiva">Tobillo <span>›</span></button>
-          </div>
-
-          <div class="hotspot hotspot-pie">
-            <button class="zone-label" data-title="Pie" data-text="Pie: puede requerir trabajo de apoyo, fuerza intrínseca y control de la pisada." data-list="Short foot|Control del apoyo|Progresión de carga al caminar o correr">Pie <span>›</span></button>
           </div>
         </div>
       </article>
