@@ -1,7 +1,3 @@
-
-
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -447,24 +443,20 @@
       left:var(--x);
       top:var(--y);
       width:auto;
-      height:46px;
-      transform:translate(-50%, -50%);
+      height:auto;
+      transform:translateY(-50%);
       display:flex;
       align-items:center;
       pointer-events:auto;
     }
 
-    .dot{
-      display:none;
-    }
+    .dot{display:none;}
 
-    .hotspot::before{
-      display:none;
-    }
+    .hotspot::before{display:none;}
 
     .zone-label{
-      width:142px;
-      min-width:142px;
+      width:170px;
+      min-width:170px;
       border:1px solid rgba(255,75,24,.55);
       background:rgba(0,0,0,.44);
       color:#fff;
@@ -487,15 +479,15 @@
     }
 
     /* Posiciones ajustadas sobre la imagen del cuerpo */
-    .hotspot-cervical{--x:62%; --y:16%;}
-    .hotspot-hombro{--x:72%; --y:25%;}
-    .hotspot-codo{--x:78%; --y:39%;}
-    .hotspot-lumbar{--x:50%; --y:40%;}
-    .hotspot-cadera{--x:57%; --y:54%;}
-    .hotspot-rodilla{--x:57%; --y:67%;}
-    .hotspot-tobillo{--x:51%; --y:82%;}
-    .hotspot-mano{--x:26%; --y:49%;}
-    .hotspot-pie{--x:59%; --y:94%;}
+    .hotspot-cervical{--x:61%; --y:11%;}
+    .hotspot-hombro{--x:67%; --y:22%;}
+    .hotspot-codo{--x:74%; --y:36%;}
+    .hotspot-lumbar{--x:45%; --y:38%;}
+    .hotspot-cadera{--x:50%; --y:51%;}
+    .hotspot-mano{--x:24%; --y:52%;}
+    .hotspot-rodilla{--x:50%; --y:66%;}
+    .hotspot-tobillo{--x:44%; --y:80%;}
+    .hotspot-pie{--x:51%; --y:91%;}
 
     @media(max-width:820px){
       .page{width:min(100% - 22px, 720px); padding-top:18px}
@@ -513,21 +505,23 @@
       .mini:nth-child(2){border-right:0}
       .hero h1{font-size:2.55rem}
 
-      .zone-map-card{min-height:760px; background-size:contain; background-position:center bottom; padding:22px;}
+      .zone-map-card{min-height:900px; background-size:contain; background-position:center bottom; padding:22px;}
       .zone-map-head{width:46%;}
       .zone-map-help{left:22px; bottom:22px; width:190px; font-size:.9rem;}
-      .hotspot{width:auto; height:42px;}
+      .hotspot{width:auto; height:auto;}
       .dot{display:none;}
-      .zone-label{min-width:118px; padding:10px 13px; font-size:.86rem;}
-      .hotspot-cervical{--x:68%; --y:18%;}
-      .hotspot-hombro{--x:75%; --y:30%;}
-      .hotspot-codo{--x:84%; --y:44%;}
-      .hotspot-lumbar{--x:55%; --y:43%;}
-      .hotspot-cadera{--x:62%; --y:55%;}
-      .hotspot-rodilla{--x:61%; --y:68%;}
-      .hotspot-tobillo{--x:52%; --y:82%;}
-      .hotspot-mano{--x:26%; --y:55%;}
-      .hotspot-pie{--x:60%; --y:94%;}
+      .zone-label{width:170px; min-width:170px; padding:10px 13px; font-size:.86rem;}
+
+      /* Posiciones móviles: cada nombre queda junto a su círculo/articulación real */
+      .hotspot-cervical{--x:43%; --y:34%;}
+      .hotspot-hombro{--x:54%; --y:39%;}
+      .hotspot-codo{--x:62%; --y:48%;}
+      .hotspot-lumbar{--x:36%; --y:45%;}
+      .hotspot-cadera{--x:44%; --y:56%;}
+      .hotspot-mano{--x:9%; --y:63%;}
+      .hotspot-rodilla{--x:43%; --y:67%;}
+      .hotspot-tobillo{--x:36%; --y:81%;}
+      .hotspot-pie{--x:42%; --y:90%;}
     }
   </style>
 </head>
@@ -592,6 +586,10 @@
             <button class="zone-label" data-title="Cadera" data-text="Cadera: puede requerir movilidad, activación de glúteos y control de pelvis antes de cargar más." data-list="Movilidad de cadera|Activación de glúteo medio|Control de pelvis|Progresión funcional">Cadera <span>›</span></button>
           </div>
 
+          <div class="hotspot hotspot-mano">
+            <button class="zone-label" data-title="Mano" data-text="Mano: puede requerir movilidad, fuerza de agarre y control progresivo." data-list="Movilidad de muñeca y dedos|Fuerza de agarre suave|Progresión funcional">Mano <span>›</span></button>
+          </div>
+
           <div class="hotspot hotspot-rodilla">
             <span class="dot"></span>
             <button class="zone-label" data-title="Rodilla" data-text="Rodilla: puede necesitar recuperar fuerza, control y tolerancia a la carga." data-list="Fuerza de piernas|Control al subir o bajar|Progresión funcional">Rodilla <span>›</span></button>
@@ -602,14 +600,8 @@
             <button class="zone-label" data-title="Tobillo" data-text="Tobillo: puede necesitar movilidad, estabilidad y seguridad al apoyar." data-list="Movilidad de tobillo|Equilibrio|Activación progresiva">Tobillo <span>›</span></button>
           </div>
 
-          <div class="hotspot hotspot-mano">
-            <span class="dot"></span>
-            <button class="zone-label" data-title="Mano" data-text="Mano: puede requerir movilidad, fuerza de agarre y control progresivo." data-list="Movilidad de muñeca y dedos|Activación suave de agarre|Progresión funcional">Mano <span>›</span></button>
-          </div>
-
           <div class="hotspot hotspot-pie">
-            <span class="dot"></span>
-            <button class="zone-label" data-title="Pie" data-text="Pie: puede necesitar estabilidad, movilidad y adaptación progresiva a la carga." data-list="Movilidad del pie|Apoyo y equilibrio|Progresión de carga">Pie <span>›</span></button>
+            <button class="zone-label" data-title="Pie" data-text="Pie: puede necesitar movilidad, fuerza intrínseca y tolerancia progresiva al apoyo." data-list="Movilidad de pie|Short foot|Carga progresiva">Pie <span>›</span></button>
           </div>
         </div>
       </article>
