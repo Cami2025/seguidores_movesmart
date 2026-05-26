@@ -1,5 +1,7 @@
 
 
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -380,7 +382,7 @@
       min-height:520px;
       padding:28px;
       background:
-        linear-gradient(90deg, rgba(5,4,8,.94) 0%, rgba(8,6,12,.58) 46%, rgba(8,6,12,.08) 100%),
+        linear-gradient(90deg, rgba(5,4,8,.88) 0%, rgba(8,6,12,.42) 38%, rgba(8,6,12,.05) 100%),
         linear-gradient(145deg, rgba(255,255,255,.06), rgba(255,255,255,.01)),
         var(--card-img),
         var(--card);
@@ -444,7 +446,7 @@
       position:absolute;
       left:var(--x);
       top:var(--y);
-      width:calc(100% - var(--x) - 18px);
+      width:calc(100% - var(--x) - 28px);
       height:46px;
       transform:translateY(-50%);
       display:flex;
@@ -475,8 +477,8 @@
     }
 
     .zone-label{
-      width:142px;
-      min-width:142px;
+      width:170px;
+      min-width:170px;
       border:1px solid rgba(255,75,24,.55);
       background:rgba(0,0,0,.44);
       color:#fff;
@@ -499,13 +501,13 @@
     }
 
     /* Posiciones ajustadas sobre la imagen del cuerpo */
-    .hotspot-cervical{--x:56%; --y:10%;}
-    .hotspot-hombro{--x:66%; --y:20%;}
-    .hotspot-codo{--x:72%; --y:34%;}
-    .hotspot-lumbar{--x:61%; --y:49%;}
-    .hotspot-cadera{--x:52%; --y:55%;}
-    .hotspot-rodilla{--x:59%; --y:70%;}
-    .hotspot-tobillo{--x:42%; --y:86%;}
+    .hotspot-cervical{--x:64%; --y:10%;}
+    .hotspot-hombro{--x:65%; --y:21%;}
+    .hotspot-codo{--x:68%; --y:35%;}
+    .hotspot-lumbar{--x:64%; --y:50%;}
+    .hotspot-cadera{--x:64%; --y:58%;}
+    .hotspot-rodilla{--x:64%; --y:73%;}
+    .hotspot-tobillo{--x:64%; --y:90%;}
 
     @media(max-width:820px){
       .page{width:min(100% - 22px, 720px); padding-top:18px}
