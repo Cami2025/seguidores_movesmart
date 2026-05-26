@@ -1,7 +1,3 @@
-
-
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -477,56 +473,61 @@
 
     .hotspot{
       position:absolute;
-      right:26px;
+      left:var(--x);
       top:var(--y);
       width:auto;
-      height:44px;
-      transform:translateY(-50%);
+      height:auto;
+      transform:translate(-50%, -50%);
       display:flex;
       align-items:center;
-      justify-content:flex-end;
+      justify-content:center;
       pointer-events:auto;
     }
 
-    /* Se ocultan los círculos y líneas laterales para dejar solo los botones */
+    /* Mantiene ocultos los círculos/líneas extra: usamos solo los círculos que ya vienen en la imagen */
     .dot,
     .hotspot::before{
       display:none;
     }
 
     .zone-label{
-      width:166px;
-      min-width:166px;
-      border:1px solid rgba(255,75,24,.55);
-      background:rgba(0,0,0,.52);
+      width:132px;
+      min-width:132px;
+      border:1px solid rgba(255,75,24,.72);
+      background:rgba(0,0,0,.58);
       color:#fff;
       border-radius:999px;
-      padding:12px 16px;
+      padding:10px 13px;
       display:flex;
       justify-content:space-between;
       align-items:center;
-      gap:12px;
+      gap:10px;
       font-weight:900;
       cursor:pointer;
-      box-shadow:0 12px 34px rgba(0,0,0,.34);
+      box-shadow:
+        0 0 0 5px rgba(255,75,24,.10),
+        0 10px 28px rgba(0,0,0,.42);
       transition:.22s ease;
-      backdrop-filter:blur(6px);
+      backdrop-filter:blur(7px);
+      font-size:.9rem;
     }
 
     .zone-label:hover{
-      transform:translateX(4px);
+      transform:scale(1.04);
       border-color:rgba(255,75,24,.95);
-      box-shadow:0 0 28px rgba(255,75,24,.18);
+      box-shadow:
+        0 0 0 7px rgba(255,75,24,.13),
+        0 0 28px rgba(255,75,24,.22);
     }
 
-    /* Posiciones de los botones sin círculos ni líneas laterales */
-    .hotspot-cervical{--y:11%;}
-    .hotspot-hombro{--y:22%;}
-    .hotspot-codo{--y:35%;}
-    .hotspot-lumbar{--y:49%;}
-    .hotspot-cadera{--y:58%;}
-    .hotspot-rodilla{--y:73%;}
-    .hotspot-tobillo{--y:89%;}
+    /* Botones ubicados encima de los círculos reales de la imagen */
+    .hotspot-cervical{--x:47%; --y:17%;}
+    .hotspot-hombro{--x:55%; --y:25%;}
+    .hotspot-codo{--x:59%; --y:38%;}
+    .hotspot-lumbar{--x:45%; --y:45%;}
+    .hotspot-cadera{--x:50%; --y:53%;}
+    .hotspot-rodilla{--x:51%; --y:67%;}
+    .hotspot-tobillo{--x:50%; --y:83%;}
 
     @media(max-width:820px){
       .page{width:min(100% - 22px, 720px); padding-top:18px}
@@ -553,15 +554,15 @@
       }
       .zone-map-head{width:44%; max-width:190px;}
       .zone-map-help{left:22px; bottom:22px; width:190px; font-size:.9rem;}
-      .hotspot{right:16px; height:40px;}
-      .zone-label{width:126px; min-width:126px; padding:10px 13px; font-size:.82rem;}
-      .hotspot-cervical{--y:13%;}
-      .hotspot-hombro{--y:24%;}
-      .hotspot-codo{--y:37%;}
-      .hotspot-lumbar{--y:50%;}
-      .hotspot-cadera{--y:59%;}
-      .hotspot-rodilla{--y:74%;}
-      .hotspot-tobillo{--y:90%;}
+      .hotspot{height:auto; transform:translate(-50%, -50%);}
+      .zone-label{width:108px; min-width:108px; padding:9px 11px; font-size:.76rem;}
+      .hotspot-cervical{--x:50%; --y:17%;}
+      .hotspot-hombro{--x:58%; --y:25%;}
+      .hotspot-codo{--x:63%; --y:38%;}
+      .hotspot-lumbar{--x:48%; --y:45%;}
+      .hotspot-cadera{--x:53%; --y:53%;}
+      .hotspot-rodilla{--x:54%; --y:67%;}
+      .hotspot-tobillo{--x:53%; --y:84%;}
     }
   </style>
 </head>
