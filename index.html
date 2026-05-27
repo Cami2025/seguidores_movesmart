@@ -263,9 +263,47 @@
     }
 
     .zone-map-head{
-      width:100%;
-      max-width:260px;
-    }
+  width:100%;
+  max-width:720px;
+  display:grid;
+  grid-template-columns:86px 1px 1fr;
+  grid-template-areas:
+    "icon line text"
+    "title title title";
+  column-gap:22px;
+  row-gap:28px;
+  align-items:center;
+}
+
+.zone-map-head .icon{
+  grid-area:icon;
+  width:76px;
+  height:76px;
+  margin:0;
+}
+
+.zone-map-head::after{
+  content:"";
+  grid-area:line;
+  width:1px;
+  height:70px;
+  background:rgba(255,255,255,.28);
+}
+
+.zone-map-head h2{
+  grid-area:title;
+  margin:0;
+  font-size:clamp(2.7rem, 5vw, 4.2rem);
+  line-height:.98;
+}
+
+.zone-map-head p{
+  grid-area:text;
+  margin:0;
+  max-width:380px;
+  font-size:1.15rem;
+  line-height:1.45;
+}
 
     .zone-map-help{
       position:absolute;
