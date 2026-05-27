@@ -609,7 +609,24 @@
   column-gap:18px;
   align-items:center;
   max-width:100%;
+        .zone-panel.active{
+  position:fixed;
+  left:50%;
+  top:50%;
+  transform:translate(-50%, -50%);
+  width:min(330px, calc(100vw - 38px));
+  max-width:min(330px, calc(100vw - 38px));
+  z-index:9999;
 }
+
+.zone-box:has(.zone-panel.active){
+  z-index:9999;
+}
+
+.hotspot:has(.zone-panel.active){
+  z-index:9999;
+}
+
 
 .zone-map-head .icon{
   grid-area:icon;
