@@ -600,6 +600,34 @@
     .hotspot-pie{--x:43%; --y:90%;}
 
     @media(max-width:820px){
+      .zone-map-head{
+  display:grid;
+  grid-template-columns:90px 1fr;
+  grid-template-areas:
+    "icon text"
+    "title title";
+  column-gap:18px;
+  align-items:center;
+  max-width:100%;
+}
+
+.zone-map-head .icon{
+  grid-area:icon;
+  margin:0;
+}
+
+.zone-map-head h2{
+  grid-area:title;
+  margin-top:24px;
+}
+
+.zone-map-head p{
+  grid-area:text;
+  margin:0;
+  font-size:1.05rem;
+  line-height:1.45;
+  max-width:260px;
+}
       .page{
         width:min(100% - 22px, 720px);
         padding-top:18px;
