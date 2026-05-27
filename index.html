@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -248,6 +247,273 @@
 
     .footer span{color:var(--accent); font-weight:900}
 
+
+    /* RESPUESTAS EN EL MISMO CONTENEDOR */
+    .health-options{
+      align-items:start;
+    }
+
+    .option-box{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .option-box .option{
+      width:100%;
+    }
+
+    .inline-panel{
+      display:none;
+      padding:16px;
+      border-radius:22px;
+      background:rgba(0,0,0,.42);
+      border:1px solid rgba(255,75,24,.35);
+      color:#fff;
+      box-shadow:0 14px 34px rgba(0,0,0,.28);
+    }
+
+    .inline-panel.active{
+      display:block;
+      animation:panelIn .22s ease both;
+    }
+
+    @keyframes panelIn{
+      from{opacity:0; transform:translateY(-6px);}
+      to{opacity:1; transform:translateY(0);}
+    }
+
+    .inline-panel label{
+      display:block;
+      color:#fff;
+      font-weight:850;
+      margin-bottom:10px;
+    }
+
+    .inline-panel input[type="range"]{
+      width:100%;
+      accent-color:var(--accent);
+      cursor:pointer;
+    }
+
+    .chip-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+
+    .chip{
+      border:1px solid rgba(255,75,24,.55);
+      background:rgba(0,0,0,.45);
+      color:#fff;
+      border-radius:999px;
+      padding:10px 14px;
+      font-weight:850;
+      cursor:pointer;
+      transition:.2s ease;
+    }
+
+    .chip:hover,
+    .chip.active{
+      background:linear-gradient(180deg, var(--accent-2), var(--accent));
+      border-color:rgba(255,255,255,.18);
+      box-shadow:0 12px 26px rgba(255,75,24,.24);
+    }
+
+    .zone-box{
+      display:flex;
+      flex-direction:column;
+      align-items:flex-start;
+      gap:10px;
+    }
+
+    .zone-panel{
+      width:260px;
+      max-width:260px;
+      padding:14px;
+      border-radius:22px;
+      background:rgba(0,0,0,.58);
+      border:1px solid rgba(255,75,24,.45);
+      backdrop-filter:blur(8px);
+      box-shadow:0 16px 38px rgba(0,0,0,.38);
+    }
+
+    .zone-panel .chip{
+      width:100%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      text-align:left;
+      margin:0;
+      border-radius:16px;
+      padding:10px 12px;
+      font-size:.82rem;
+      line-height:1.25;
+    }
+
+    .zone-panel .chip + .chip{
+      margin-top:8px;
+    }
+
+
+
+    /* MEJORA VISUAL: paneles desplegados con colores diferenciados */
+    .option-box .option,
+    .zone-label{
+      background:rgba(0,0,0,.48);
+    }
+
+    .option-box:has(.inline-panel.active) > .option,
+    .zone-box:has(.zone-panel.active) > .zone-label{
+      background:linear-gradient(180deg, var(--accent-2), var(--accent));
+      border-color:rgba(255,255,255,.16);
+      box-shadow:0 14px 34px rgba(255,75,24,.28);
+    }
+
+    .option-box:has(#dolorPanel.active) > .option{
+      background:linear-gradient(180deg, rgba(255,106,45,.95), rgba(189,52,20,.86));
+    }
+
+    .option-box:has(#rigidezPanel.active) > .option{
+      background:linear-gradient(180deg, rgba(136,102,43,.92), rgba(82,60,28,.86));
+    }
+
+    .option-box:has(#energiaPanel.active) > .option{
+      background:linear-gradient(180deg, rgba(29,140,68,.92), rgba(8,75,42,.86));
+    }
+
+    .option-box:has(#tiempoPanel.active) > .option{
+      background:linear-gradient(180deg, rgba(42,99,226,.92), rgba(17,46,117,.86));
+    }
+
+    #dolorPanel{
+      background:
+        linear-gradient(145deg, rgba(255,83,31,.24), rgba(70,18,9,.78)),
+        rgba(0,0,0,.62);
+      border-color:rgba(255,92,38,.62);
+    }
+
+    #rigidezPanel{
+      background:
+        linear-gradient(145deg, rgba(143,104,45,.28), rgba(53,42,22,.82)),
+        rgba(0,0,0,.62);
+      border-color:rgba(191,137,63,.50);
+    }
+
+    #energiaPanel{
+      background:
+        linear-gradient(145deg, rgba(20,140,67,.30), rgba(6,54,34,.82)),
+        rgba(0,0,0,.62);
+      border-color:rgba(54,213,112,.36);
+    }
+
+    #tiempoPanel{
+      background:
+        linear-gradient(145deg, rgba(43,100,232,.30), rgba(9,34,88,.84)),
+        rgba(0,0,0,.62);
+      border-color:rgba(72,139,255,.40);
+    }
+
+    .inline-panel{
+      backdrop-filter:blur(12px);
+    }
+
+    .inline-panel label{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      font-size:.98rem;
+    }
+
+    .inline-panel label strong{
+      font-size:1.25rem;
+      color:#fff;
+    }
+
+    .inline-panel input[type="range"]{
+      height:6px;
+    }
+
+    .chip-row{
+      gap:12px;
+    }
+
+    .chip{
+      background:rgba(0,0,0,.26);
+      border-color:rgba(255,255,255,.16);
+    }
+
+    .zone-panel{
+      width:300px;
+      max-width:300px;
+      background:
+        linear-gradient(180deg, rgba(255,248,225,.98), rgba(255,227,177,.96));
+      border:1px solid rgba(255,116,42,.72);
+      color:#21140c;
+      box-shadow:
+        0 24px 60px rgba(0,0,0,.58),
+        0 0 0 1px rgba(255,255,255,.14) inset;
+    }
+
+    .zone-panel::before{
+      content:"Patologías comunes";
+      display:block;
+      color:#43220f;
+      font-weight:950;
+      font-size:.86rem;
+      margin:0 0 10px;
+      opacity:.92;
+    }
+
+    .zone-panel .chip{
+      color:#24150d;
+      background:rgba(255,255,255,.42);
+      border:1px solid rgba(95,61,31,.18);
+      box-shadow:0 2px 10px rgba(120,72,25,.08);
+    }
+
+    .zone-panel .chip:hover,
+    .zone-panel .chip.active{
+      color:#fff;
+      background:linear-gradient(180deg, var(--accent-2), var(--accent));
+      border-color:rgba(255,255,255,.35);
+      box-shadow:0 12px 24px rgba(255,75,24,.24);
+    }
+
+    .zone-panel .chip::after{
+      content:"○";
+      margin-left:10px;
+      opacity:.8;
+    }
+
+    .zone-panel .chip.active::after{
+      content:"●";
+      color:#fff;
+    }
+
+
+
+
+    /* FIX: asegurar que el panel abierto quede por encima de los otros botones */
+    .zone-box{
+      position:relative;
+      z-index:60;
+    }
+
+    .hotspot{
+      z-index:10;
+    }
+
+    .hotspot:has(.zone-panel.active){
+      z-index:100;
+    }
+
+    .zone-panel{
+      position:relative;
+      z-index:50;
+    }
+
     /* MAPA CORPORAL */
     .zone-map-card{
       min-height:760px;
@@ -263,49 +529,9 @@
     }
 
     .zone-map-head{
-  width:100%;
-  max-width:720px;
-  display:grid;
-  grid-template-columns:86px 1px 1fr;
-  grid-template-areas:
-    "icon line text"
-    "title title title";
-  column-gap:22px;
-  row-gap:28px;
-  align-items:center;
-}
-
-.zone-map-head .icon{
-  grid-area:icon;
-  width:76px;
-  height:76px;
-  margin:0;
-}
-
-.zone-map-head::after{
-  content:"";
-  grid-area:line;
-  width:1px;
-  height:70px;
-  background:rgba(255,255,255,.28);
-}
-
-.zone-map-head h2{
-    grid-area:title;
-  margin:0 0 12px;
-  font-size:clamp(1.65rem, 3vw, 2.4rem);
-  line-height:1.06;
-  letter-spacing:-.045em;
-}
-
-.zone-map-head p{
- grid-area:text;
-  margin:0;
-  max-width:380px;
-  color:var(--muted);
-  font-size:1.05rem;
-  line-height:1.55;
-}
+      width:100%;
+      max-width:260px;
+    }
 
     .zone-map-help{
       position:absolute;
@@ -366,7 +592,7 @@
     .hotspot-cervical{--x:50%; --y:30%;}
     .hotspot-hombro{--x:57%; --y:37%;}
     .hotspot-codo{--x:58%; --y:48%;}
-    .hotspot-lumbar{--x:36%; --y:44%;}
+    .hotspot-lumbar{--x:25%; --y:44%;}
     .hotspot-cadera{--x:45%; --y:56%;}
     .hotspot-mano{--x:10%; --y:63%;}
     .hotspot-rodilla{--x:44%; --y:67%;}
@@ -403,7 +629,11 @@
         background-position:center bottom 38px;
       }
 
-    
+      .zone-map-head{
+        width:100%;
+        max-width:230px;
+      }
+
       .zone-map-help{
         left:22px;
         bottom:26px;
@@ -418,12 +648,24 @@
         font-size:.82rem;
       }
 
+      .zone-panel{
+        width:min(280px, calc(100vw - 54px));
+        max-width:min(280px, calc(100vw - 54px));
+        padding:12px;
+      }
+
+      .zone-panel .chip{
+        font-size:.78rem;
+        padding:9px 10px;
+      }
+
+
       .hotspot-cervical{--x:45%; --y:25%;}
       .hotspot-hombro{--x:53%; --y:32%;}
       .hotspot-codo{--x:56%; --y:42%;}
-      .hotspot-lumbar{--x:8%; --y:42%;}
+      .hotspot-lumbar{--x:32%; --y:38%;}
       .hotspot-cadera{--x:43%; --y:50%;}
-      .hotspot-mano{--x:8%; --y:55%;}
+      .hotspot-mano{--x:8%; --y:58%;}
       .hotspot-rodilla{--x:42%; --y:63%;}
       .hotspot-tobillo{--x:35%; --y:77%;}
       .hotspot-pie{--x:40%; --y:86%;}
@@ -447,11 +689,52 @@
         <h2>¿Cómo te<br>sientes hoy?</h2>
         <p>Tu estado cambia cada día. El plan también.</p>
 
-        <div class="options">
-          <button class="option" data-title="Dolor hoy" data-text="Hoy tu cuerpo puede necesitar bajar carga, moverse con más calma y recuperar confianza." data-list="Movilidad suave|Ejercicios que no aumenten la molestia|Respiración y descarga de tensión">Dolor hoy <span>›</span></button>
-          <button class="option" data-title="Rigidez" data-text="La rigidez suele necesitar movimiento progresivo, sin forzar ni apurar el proceso." data-list="Movilidad guiada|Activación suave|Progresión gradual">Rigidez <span>›</span></button>
-          <button class="option" data-title="Me siento mejor, pero aún molesta" data-text="Es una buena señal. Aquí buscamos fortalecer y volver a movimientos reales sin irritar." data-list="Fuerza progresiva|Control del movimiento|Confianza al moverte">Me siento mejor <span>›</span></button>
-          <button class="option" data-title="Quiero volver al deporte" data-text="Volver al deporte requiere preparar fuerza, estabilidad e impacto de forma progresiva." data-list="Fuerza específica|Impacto gradual|Retorno seguro a tu actividad">Volver al deporte <span>›</span></button>
+        <div class="options health-options">
+          <div class="option-box">
+            <button class="option" type="button" onclick="togglePanel('dolorPanel')">
+              Dolor <span>›</span>
+            </button>
+            <div class="inline-panel" id="dolorPanel">
+              <label>Escala de dolor: <strong id="dolorValue">5</strong>/10</label>
+              <input type="range" min="0" max="10" value="5" oninput="actualizarValor('dolorValue', this.value)">
+            </div>
+          </div>
+
+          <div class="option-box">
+            <button class="option" type="button" onclick="togglePanel('rigidezPanel')">
+              Rigidez <span>›</span>
+            </button>
+            <div class="inline-panel" id="rigidezPanel">
+              <label>Escala de rigidez: <strong id="rigidezValue">5</strong>/10</label>
+              <input type="range" min="0" max="10" value="5" oninput="actualizarValor('rigidezValue', this.value)">
+            </div>
+          </div>
+
+          <div class="option-box">
+            <button class="option" type="button" onclick="togglePanel('energiaPanel')">
+              Energía <span>›</span>
+            </button>
+            <div class="inline-panel" id="energiaPanel">
+              <div class="chip-row">
+                <button type="button" class="chip" onclick="selectChip(this)">Baja</button>
+                <button type="button" class="chip" onclick="selectChip(this)">Media</button>
+                <button type="button" class="chip" onclick="selectChip(this)">Alta</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="option-box">
+            <button class="option" type="button" onclick="togglePanel('tiempoPanel')">
+              Tiempo disponible <span>›</span>
+            </button>
+            <div class="inline-panel" id="tiempoPanel">
+              <div class="chip-row">
+                <button type="button" class="chip" onclick="selectChip(this)">10 min</button>
+                <button type="button" class="chip" onclick="selectChip(this)">20 min</button>
+                <button type="button" class="chip" onclick="selectChip(this)">30 min</button>
+              </div>
+            </div>
+          </div>
         </div>
       </article>
 
@@ -467,15 +750,133 @@
         </div>
 
         <div class="zone-points">
-          <div class="hotspot hotspot-cervical"><button class="zone-label" data-title="Cervical" data-text="Zona cervical: puede relacionarse con rigidez, tensión o sobrecarga postural." data-list="Movilidad cervical suave|Respiración y descarga|Activación escapular liviana">Cervical <span>›</span></button></div>
-          <div class="hotspot hotspot-hombro"><button class="zone-label" data-title="Hombro" data-text="Hombro: puede necesitar movilidad, control escapular y fuerza progresiva." data-list="Movilidad de hombro|Activación escapular|Progresión de carga">Hombro <span>›</span></button></div>
-          <div class="hotspot hotspot-codo"><button class="zone-label" data-title="Codo" data-text="Codo: puede requerir descarga, movilidad y fortalecimiento gradual de antebrazo." data-list="Movilidad suave|Isométricos de antebrazo|Progresión de agarre">Codo <span>›</span></button></div>
-          <div class="hotspot hotspot-lumbar"><button class="zone-label" data-title="Lumbar" data-text="Zona lumbar: suele responder bien a movimiento dosificado, control de tronco y fuerza progresiva." data-list="Movilidad lumbar suave|Control de tronco|Tolerancia progresiva">Lumbar <span>›</span></button></div>
-          <div class="hotspot hotspot-cadera"><button class="zone-label" data-title="Cadera" data-text="Cadera: puede requerir movilidad, activación de glúteos y control de pelvis antes de cargar más." data-list="Movilidad de cadera|Activación de glúteo medio|Control de pelvis|Progresión funcional">Cadera <span>›</span></button></div>
-          <div class="hotspot hotspot-mano"><button class="zone-label" data-title="Mano" data-text="Mano: puede requerir movilidad, fuerza de agarre y control progresivo." data-list="Movilidad de muñeca y dedos|Fuerza de agarre suave|Progresión funcional">Mano <span>›</span></button></div>
-          <div class="hotspot hotspot-rodilla"><button class="zone-label" data-title="Rodilla" data-text="Rodilla: puede necesitar recuperar fuerza, control y tolerancia a la carga." data-list="Fuerza de piernas|Control al subir o bajar|Progresión funcional">Rodilla <span>›</span></button></div>
-          <div class="hotspot hotspot-tobillo"><button class="zone-label" data-title="Tobillo" data-text="Tobillo: puede necesitar movilidad, estabilidad y seguridad al apoyar." data-list="Movilidad de tobillo|Equilibrio|Activación progresiva">Tobillo <span>›</span></button></div>
-          <div class="hotspot hotspot-pie"><button class="zone-label" data-title="Pie" data-text="Pie: puede necesitar movilidad, fuerza intrínseca y tolerancia progresiva al apoyo." data-list="Movilidad de pie|Short foot|Carga progresiva">Pie <span>›</span></button></div>
+          <div class="hotspot hotspot-cervical">
+            <div class="zone-box">
+              <button class="zone-label" type="button" onclick="togglePanel('cervicalPanel')">
+                Cervical <span>›</span>
+              </button>
+              <div class="inline-panel zone-panel" id="cervicalPanel">
+                <button class="chip" type="button" onclick="selectChip(this)">Dolor muscular / tensión cervical</button>
+                <button class="chip" type="button" onclick="selectChip(this)">Rigidez al mover el cuello</button>
+                <button class="chip" type="button" onclick="selectChip(this)">Cervicobraquialgia</button>
+                <button class="chip" type="button" onclick="selectChip(this)">Dolor postural</button>
+                <button class="chip" type="button" onclick="selectChip(this)">No estoy segura / otro</button>
+              </div>
+            </div>
+          </div>
+          <div class="hotspot hotspot-hombro">
+            <div class="zone-box">
+              <button class="zone-label" type="button" onclick="togglePanel('hombroPanel')">
+                Hombro <span>›</span>
+              </button>
+              <div class="inline-panel zone-panel" id="hombroPanel">
+                <button class="chip" type="button" onclick="selectChip(this)">Tendinopatía manguito rotador</button>
+                <button class="chip" type="button" onclick="selectChip(this)">Pinzamiento subacromial</button>
+                <button class="chip" type="button" onclick="selectChip(this)">Rigidez / hombro congelado</button>
+                <button class="chip" type="button" onclick="selectChip(this)">Dolor al levantar el brazo</button>
+                <button class="chip" type="button" onclick="selectChip(this)">No estoy segura / otro</button>
+              </div>
+            </div>
+          </div>
+          <div class="hotspot hotspot-codo">
+            <div class="zone-box">
+              <button class="zone-label" type="button" onclick="togglePanel('codoPanel')">
+                Codo <span>›</span>
+              </button>
+              <div class="inline-panel zone-panel" id="codoPanel">
+                <button class="chip" type="button" onclick="selectChip(this)">Codo de tenista</button>
+                <button class="chip" type="button" onclick="selectChip(this)">Codo de golfista</button>
+                <button class="chip" type="button" onclick="selectChip(this)">Sobrecarga por agarre</button>
+                <button class="chip" type="button" onclick="selectChip(this)">Rigidez del codo</button>
+                <button class="chip" type="button" onclick="selectChip(this)">No estoy segura / otro</button>
+              </div>
+            </div>
+          </div>
+          <div class="hotspot hotspot-lumbar">
+            <div class="zone-box">
+              <button class="zone-label" type="button" onclick="togglePanel('lumbarPanel')">
+                Lumbar <span>›</span>
+              </button>
+              <div class="inline-panel zone-panel" id="lumbarPanel">
+                <button class="chip" type="button" onclick="selectChip(this)">Lumbalgia muscular</button>
+                <button class="chip" type="button" onclick="selectChip(this)">Rigidez lumbar</button>
+                <button class="chip" type="button" onclick="selectChip(this)">Dolor al estar sentada</button>
+                <button class="chip" type="button" onclick="selectChip(this)">Dolor al inclinarme</button>
+                <button class="chip" type="button" onclick="selectChip(this)">Dolor que baja a pierna</button>
+                <button class="chip" type="button" onclick="selectChip(this)">No estoy segura / otro</button>
+              </div>
+            </div>
+          </div>
+          <div class="hotspot hotspot-cadera">
+            <div class="zone-box">
+              <button class="zone-label" type="button" onclick="togglePanel('caderaPanel')">
+                Cadera <span>›</span>
+              </button>
+              <div class="inline-panel zone-panel" id="caderaPanel">
+                <button class="chip" type="button" onclick="selectChip(this)">Tendinopatía glútea</button>
+                <button class="chip" type="button" onclick="selectChip(this)">Dolor lateral de cadera</button>
+                <button class="chip" type="button" onclick="selectChip(this)">Rigidez de cadera</button>
+                <button class="chip" type="button" onclick="selectChip(this)">Dolor al correr</button>
+                <button class="chip" type="button" onclick="selectChip(this)">No estoy segura / otro</button>
+              </div>
+            </div>
+          </div>
+          <div class="hotspot hotspot-mano">
+            <div class="zone-box">
+              <button class="zone-label" type="button" onclick="togglePanel('manoPanel')">
+                Mano <span>›</span>
+              </button>
+              <div class="inline-panel zone-panel" id="manoPanel">
+                <button class="chip" type="button" onclick="selectChip(this)">Tendinitis muñeca</button>
+                <button class="chip" type="button" onclick="selectChip(this)">Dolor por sobreuso</button>
+                <button class="chip" type="button" onclick="selectChip(this)">Rigidez dedos o muñeca</button>
+                <button class="chip" type="button" onclick="selectChip(this)">Hormigueo / túnel carpiano</button>
+                <button class="chip" type="button" onclick="selectChip(this)">No estoy segura / otro</button>
+              </div>
+            </div>
+          </div>
+          <div class="hotspot hotspot-rodilla">
+            <div class="zone-box">
+              <button class="zone-label" type="button" onclick="togglePanel('rodillaPanel')">
+                Rodilla <span>›</span>
+              </button>
+              <div class="inline-panel zone-panel" id="rodillaPanel">
+                <button class="chip" type="button" onclick="selectChip(this)">Dolor patelofemoral</button>
+                <button class="chip" type="button" onclick="selectChip(this)">Tendinopatía rotuliana</button>
+                <button class="chip" type="button" onclick="selectChip(this)">Sobrecarga por correr</button>
+                <button class="chip" type="button" onclick="selectChip(this)">Molestia al bajar escaleras</button>
+                <button class="chip" type="button" onclick="selectChip(this)">No estoy segura / otro</button>
+              </div>
+            </div>
+          </div>
+          <div class="hotspot hotspot-tobillo">
+            <div class="zone-box">
+              <button class="zone-label" type="button" onclick="togglePanel('tobilloPanel')">
+                Tobillo <span>›</span>
+              </button>
+              <div class="inline-panel zone-panel" id="tobilloPanel">
+                <button class="chip" type="button" onclick="selectChip(this)">Esguince previo / inestabilidad</button>
+                <button class="chip" type="button" onclick="selectChip(this)">Tendinopatía</button>
+                <button class="chip" type="button" onclick="selectChip(this)">Rigidez de tobillo</button>
+                <button class="chip" type="button" onclick="selectChip(this)">Dolor al apoyar</button>
+                <button class="chip" type="button" onclick="selectChip(this)">No estoy segura / otro</button>
+              </div>
+            </div>
+          </div>
+          <div class="hotspot hotspot-pie">
+            <div class="zone-box">
+              <button class="zone-label" type="button" onclick="togglePanel('piePanel')">
+                Pie <span>›</span>
+              </button>
+              <div class="inline-panel zone-panel" id="piePanel">
+                <button class="chip" type="button" onclick="selectChip(this)">Fascitis plantar</button>
+                <button class="chip" type="button" onclick="selectChip(this)">Dolor arco plantar</button>
+                <button class="chip" type="button" onclick="selectChip(this)">Metatarsalgia</button>
+                <button class="chip" type="button" onclick="selectChip(this)">Rigidez del pie</button>
+                <button class="chip" type="button" onclick="selectChip(this)">No estoy segura / otro</button>
+              </div>
+            </div>
+          </div>
         </div>
       </article>
 
@@ -523,6 +924,25 @@
   </div>
 
   <script>
+
+    function togglePanel(id){
+      const panel = document.getElementById(id);
+      if(!panel) return;
+      panel.classList.toggle("active");
+    }
+
+    function actualizarValor(id, value){
+      const el = document.getElementById(id);
+      if(el) el.textContent = value;
+    }
+
+    function selectChip(button){
+      const panel = button.closest(".inline-panel");
+      if(!panel) return;
+      panel.querySelectorAll(".chip").forEach(chip => chip.classList.remove("active"));
+      button.classList.add("active");
+    }
+
     const modal = document.getElementById("modal");
     const title = document.getElementById("modalTitle");
     const text = document.getElementById("modalText");
