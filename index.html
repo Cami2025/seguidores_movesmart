@@ -1,5 +1,7 @@
 
 
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -850,6 +852,146 @@
   }
 
 }
+  
+/* =========================================================
+   FIX FINAL: Panel de patologías centrado y sin cortes
+   ========================================================= */
+
+.zone-overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.06);
+  z-index:9990;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+
+.zone-overlay.active{
+  display:block;
+}
+
+.zone-panel::before{
+  content:none !important;
+}
+
+.zone-panel.inline-panel{
+  display:none;
+}
+
+/* Cuando se abre, el panel se mueve con JS al <body>.
+   Así ya no queda atrapado dentro del hotspot ni se corta. */
+.zone-panel.inline-panel.active{
+  display:flex !important;
+  flex-direction:column !important;
+
+  position:fixed !important;
+  left:50vw !important;
+  top:50vh !important;
+  transform:translate(-50%, -50%) !important;
+
+  width:min(560px, calc(100vw - 24px)) !important;
+  max-width:calc(100vw - 24px) !important;
+  max-height:78vh !important;
+
+  overflow-y:auto !important;
+  overscroll-behavior:contain !important;
+
+  z-index:9999 !important;
+
+  padding:22px !important;
+  border-radius:28px !important;
+
+  background:linear-gradient(180deg, #fff5d9 0%, #f6dcaa 100%) !important;
+  color:#21140c !important;
+  border:1px solid rgba(255,116,42,.72) !important;
+  box-shadow:0 20px 48px rgba(0,0,0,.28) !important;
+
+  filter:none !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+  animation:none !important;
+}
+
+.zone-panel-header{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:12px !important;
+  margin-bottom:16px !important;
+  color:#43220f !important;
+  font-weight:950 !important;
+  font-size:1.15rem !important;
+}
+
+.zone-close{
+  border:0 !important;
+  border-radius:999px !important;
+  padding:10px 16px !important;
+  background:linear-gradient(180deg, var(--accent-2), var(--accent)) !important;
+  color:#fff !important;
+  font-weight:950 !important;
+  cursor:pointer !important;
+  box-shadow:0 10px 22px rgba(255,75,24,.24) !important;
+  white-space:nowrap !important;
+}
+
+.zone-panel.inline-panel.active .chip{
+  width:100% !important;
+  color:#24150d !important;
+  background:rgba(255,255,255,.62) !important;
+  border:1px solid rgba(95,61,31,.18) !important;
+  border-radius:20px !important;
+  padding:15px 18px !important;
+  font-size:1rem !important;
+  line-height:1.25 !important;
+  margin:0 0 12px 0 !important;
+  box-shadow:0 2px 10px rgba(120,72,25,.08) !important;
+}
+
+.zone-panel.inline-panel.active .chip.active,
+.zone-panel.inline-panel.active .chip:hover{
+  color:#fff !important;
+  background:linear-gradient(180deg, var(--accent-2), var(--accent)) !important;
+  border-color:rgba(255,255,255,.35) !important;
+  box-shadow:0 12px 24px rgba(255,75,24,.24) !important;
+}
+
+@media(max-width:820px){
+  .zone-overlay{
+    background:rgba(0,0,0,.04) !important;
+  }
+
+  .zone-panel.inline-panel.active{
+    width:calc(100vw - 18px) !important;
+    max-width:calc(100vw - 18px) !important;
+    max-height:74vh !important;
+    left:50vw !important;
+    top:50vh !important;
+    transform:translate(-50%, -50%) !important;
+    padding:18px !important;
+    border-radius:24px !important;
+  }
+
+  .zone-panel-header{
+    font-size:.98rem !important;
+    margin-bottom:12px !important;
+  }
+
+  .zone-close{
+    padding:8px 12px !important;
+    font-size:.84rem !important;
+  }
+
+  .zone-panel.inline-panel.active .chip{
+    width:100% !important;
+    font-size:.92rem !important;
+    line-height:1.25 !important;
+    padding:14px 16px !important;
+    border-radius:18px !important;
+  }
+}
+
   </style>
 </head>
 
@@ -1162,7 +1304,15 @@
         closeAllZonePanels();
 
         if(!alreadyOpen){
+          /*
+            IMPORTANTE:
+            Muevo el panel al body cuando se abre.
+            Así no queda atrapado dentro del hotspot ni del contenedor,
+            y Safari/iPhone ya no lo corta al lado derecho.
+          */
+          document.body.appendChild(panel);
           panel.classList.add("active");
+
           const overlay = document.getElementById("zoneOverlay");
           if(overlay) overlay.classList.add("active");
         }
