@@ -138,7 +138,15 @@
     .card > *{position:relative; z-index:1}
 
     .contenedor-1{--card-img:url("contenedor-1.webp");}
-    .contenedor-2{--card-img:url("contenedor-2.webp");}
+   .contenedor-2{
+  --card-img:url("contenedor-2.webp");
+}
+
+@media(max-width:820px){
+  .contenedor-2{
+    --card-img:url("contenedor-2-mobile.webp");
+  }
+}
     .contenedor-3{--card-img:url("contenedor-3.webp");}
     .contenedor-4{--card-img:url("contenedor-4.webp");}
 
