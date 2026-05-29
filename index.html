@@ -988,6 +988,152 @@
   }
 }
 
+
+/* =========================================================
+   RESULTADO MOVESMART - CONTENEDOR DE RECOMENDACIÓN
+   ========================================================= */
+.result-overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:12000;
+  background:rgba(0,0,0,.48);
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+}
+
+.result-overlay.active{
+  display:flex;
+}
+
+.result-box{
+  position:relative;
+  width:min(680px, calc(100vw - 24px));
+  max-height:86vh;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  padding:26px;
+  border-radius:30px;
+  background:linear-gradient(180deg, #fff5d9 0%, #f6dcaa 100%);
+  color:#21140c;
+  border:1px solid rgba(255,116,42,.74);
+  box-shadow:0 28px 70px rgba(0,0,0,.45);
+}
+
+.result-box h2{
+  margin:0 54px 20px 0;
+  font-size:clamp(1.65rem, 4vw, 2.15rem);
+  line-height:1.05;
+  letter-spacing:-.045em;
+  font-weight:950;
+  color:#24150d;
+}
+
+.result-close{
+  position:absolute;
+  top:18px;
+  right:18px;
+  width:46px;
+  height:46px;
+  border:0;
+  border-radius:16px;
+  background:linear-gradient(180deg, var(--accent-2), var(--accent));
+  color:#fff;
+  font-size:1.65rem;
+  font-weight:950;
+  line-height:1;
+  cursor:pointer;
+  box-shadow:0 12px 24px rgba(255,75,24,.28);
+}
+
+.result-card{
+  background:rgba(255,255,255,.48);
+  border:1px solid rgba(95,61,31,.13);
+  border-radius:24px;
+  padding:18px;
+  margin-top:16px;
+  box-shadow:0 3px 14px rgba(120,72,25,.08);
+}
+
+.result-card h3{
+  margin:0 0 8px;
+  color:#24150d;
+  font-size:1.15rem;
+  font-weight:950;
+}
+
+.result-card p{
+  margin:0;
+  color:#3a261a;
+  line-height:1.5;
+  font-size:1rem;
+}
+
+.result-label{
+  color:var(--accent);
+  font-weight:950;
+  font-size:.9rem;
+  margin-bottom:4px;
+}
+
+.result-value{
+  color:#21140c;
+  font-size:1.45rem;
+  font-weight:950;
+  margin-bottom:14px;
+  line-height:1.12;
+}
+
+.result-placeholder{
+  margin-top:14px;
+  padding:14px;
+  border-radius:18px;
+  border:1px dashed rgba(255,75,24,.38);
+  background:rgba(255,255,255,.30);
+  color:#4b382d;
+  line-height:1.45;
+}
+
+.result-btn{
+  width:100%;
+  margin-top:20px;
+}
+
+body.no-scroll{
+  overflow:hidden;
+  touch-action:none;
+}
+
+@media(max-width:820px){
+  .result-overlay{
+    padding:11px;
+  }
+
+  .result-box{
+    width:calc(100vw - 22px);
+    max-height:84vh;
+    padding:20px;
+    border-radius:26px;
+  }
+
+  .result-close{
+    width:42px;
+    height:42px;
+    top:14px;
+    right:14px;
+  }
+
+  .result-card{
+    padding:16px;
+    border-radius:22px;
+  }
+
+  .result-value{
+    font-size:1.25rem;
+  }
+}
+
   </style>
 </head>
 
@@ -1251,7 +1397,7 @@
         <h2>Tu siguiente<br>paso</h2>
         <p>Pequeños pasos. Elegidos para ti.</p>
 
-        <button class="btn" onclick="openModal('Orientación personalizada','Cuéntanos tu situación y podremos orientarte mejor según tu estado actual, tu objetivo y tu disponibilidad.','Evaluación inicial|Plan adaptado|Seguimiento progresivo')">
+        <button class="btn" type="button">
           Quiero mi orientación personalizada <span>›</span>
         </button>
 
@@ -1263,50 +1409,45 @@
       Avanza a tu ritmo. <span>Nosotros te acompañamos.</span>
     </div>
   </main>
+
   <!-- RESULTADO MOVESMART -->
-<div class="result-overlay" id="resultOverlay">
+  <div class="result-overlay" id="resultOverlay" onclick="if(event.target === this) closeResult()">
+    <div class="result-box" role="dialog" aria-modal="true" aria-labelledby="resultTitle">
+      <button class="result-close" type="button" onclick="closeResult()">×</button>
 
-  <div class="result-box">
+      <h2 id="resultTitle">Tu recomendación MoveSmart</h2>
 
-    <button class="result-close" onclick="closeResult()">
-      ×
-    </button>
+      <div class="result-card">
+        <div class="result-label">Zona elegida</div>
+        <div class="result-value" id="resultZona">Zona</div>
 
-    <h2>Tu recomendación MoveSmart</h2>
-
-    <div class="result-card">
-
-      <div class="result-label">Zona elegida</div>
-      <div class="result-value" id="resultZona">Rodilla</div>
-
-      <div class="result-label">Posible problema</div>
-      <div class="result-value" id="resultPatologia">
-        Dolor patelofemoral
+        <div class="result-label">Posible problema</div>
+        <div class="result-value" id="resultPatologia">Patología</div>
       </div>
 
+      <div class="result-card">
+        <h3>¿Por qué esta rutina?</h3>
+        <p id="resultTexto">
+          Vamos a priorizar movilidad, control y progresión según tu situación actual.
+        </p>
+      </div>
+
+      <div class="result-card">
+        <h3>Tu rutina sugerida</h3>
+        <p>
+          Próximamente aparecerá aquí tu mini rutina personalizada MoveSmart.
+        </p>
+        <div class="result-placeholder">
+          Aquí luego conectaremos los ejercicios, series, repeticiones y progresiones según tus respuestas.
+        </div>
+      </div>
+
+      <button class="btn result-btn" type="button" onclick="closeResult()">
+        Entendido <span>›</span>
+      </button>
     </div>
-
-    <div class="result-card">
-      <h3>¿Por qué esta rutina?</h3>
-
-      <p id="resultTexto">
-        Vamos a priorizar movilidad, control y progresión según tu situación actual.
-      </p>
-    </div>
-
-  <div class="result-card">
-  <h3>Tu rutina sugerida</h3>
-</div>
-
-<button class="btn" onclick="closeResult()">
-  Ver mi rutina <span>›</span>
-</button>
-
   </div>
-</div>
-  
 
- 
 
   <script>
 
@@ -1354,43 +1495,56 @@
       if(el) el.textContent = value;
     }
 
+    const zonasPorPanel = {
+      cervicalPanel: "Cervical",
+      hombroPanel: "Hombro",
+      codoPanel: "Codo",
+      lumbarPanel: "Lumbar",
+      caderaPanel: "Cadera",
+      manoPanel: "Mano",
+      rodillaPanel: "Rodilla",
+      tobilloPanel: "Tobillo",
+      piePanel: "Pie"
+    };
+
     function selectChip(button){
       const panel = button.closest(".inline-panel");
       if(!panel) return;
+
       panel.querySelectorAll(".chip").forEach(chip => chip.classList.remove("active"));
       button.classList.add("active");
+
+      if(panel.classList.contains("zone-panel")){
+        const zona = zonasPorPanel[panel.id] || "Zona seleccionada";
+        const patologia = button.textContent.trim();
+        openResult(zona, patologia);
+      }
     }
 
-    const modal = document.getElementById("modal");
-    const title = document.getElementById("modalTitle");
-    const text = document.getElementById("modalText");
-    const list = document.getElementById("modalList");
+    function openResult(zona, patologia){
+      const resultZona = document.getElementById("resultZona");
+      const resultPatologia = document.getElementById("resultPatologia");
+      const resultTexto = document.getElementById("resultTexto");
+      const resultOverlay = document.getElementById("resultOverlay");
 
-    function openModal(t, body, items){
-      title.textContent = t;
-      text.textContent = body;
-      list.innerHTML = "";
-      String(items).split("|").forEach(item => {
-        const li = document.createElement("li");
-        li.textContent = item;
-        list.appendChild(li);
-      });
-      modal.classList.add("active");
+      if(resultZona) resultZona.textContent = zona;
+      if(resultPatologia) resultPatologia.textContent = patologia;
+      if(resultTexto){
+        resultTexto.textContent =
+          `Seleccionaste ${zona.toLowerCase()} y una molestia compatible con “${patologia}”. Vamos a priorizar una rutina segura, progresiva y adaptada a tu estado actual.`;
+      }
+
+      closeAllZonePanels();
+
+      if(resultOverlay) resultOverlay.classList.add("active");
+      document.body.classList.add("no-scroll");
     }
 
-    function closeModal(){
-      modal.classList.remove("active");
+    function closeResult(){
+      const resultOverlay = document.getElementById("resultOverlay");
+      if(resultOverlay) resultOverlay.classList.remove("active");
+      document.body.classList.remove("no-scroll");
     }
-
-    document.querySelectorAll("[data-title]").forEach(btn => {
-      btn.addEventListener("click", () => {
-        openModal(btn.dataset.title, btn.dataset.text, btn.dataset.list);
-      });
-    });
-
-    modal.addEventListener("click", (e) => {
-      if(e.target === modal) closeModal();
-    });
   </script>
 </body>
 </html>
