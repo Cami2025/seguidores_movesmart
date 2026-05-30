@@ -1192,6 +1192,37 @@ body.no-scroll{
   margin-top:18px;
 }
 
+/* =========================================================
+   CONFIRMACIÓN DE SLIDERS 5/10
+   ========================================================= */
+.confirm-btn{
+  margin-top:12px;
+  width:100%;
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:999px;
+  padding:12px 14px;
+  background:rgba(255,255,255,.10);
+  color:#fff;
+  font-weight:900;
+  cursor:pointer;
+  transition:.2s ease;
+}
+
+.confirm-btn:hover,
+.confirm-btn.confirmed{
+  background:linear-gradient(180deg, var(--accent-2), var(--accent));
+  border-color:rgba(255,255,255,.25);
+  box-shadow:0 12px 26px rgba(255,75,24,.22);
+}
+
+.confirm-hint{
+  margin-top:8px;
+  color:rgba(255,255,255,.78);
+  font-size:.86rem;
+  line-height:1.35;
+}
+
+
   </style>
 </head>
 
@@ -1220,6 +1251,12 @@ body.no-scroll{
             <div class="inline-panel" id="dolorPanel">
               <label>Escala de dolor: <strong id="dolorValue">5</strong>/10</label>
               <input type="range" min="0" max="10" value="5" oninput="actualizarValor('dolorValue', this.value)">
+              <button class="confirm-btn" id="confirmDolorBtn" type="button" onclick="confirmarSlider('dolor')">
+                Confirmar dolor 5/10
+              </button>
+              <div class="confirm-hint">
+                Si tu dolor realmente es 5/10, confirma sin mover la barra.
+              </div>
             </div>
           </div>
 
@@ -1230,6 +1267,12 @@ body.no-scroll{
             <div class="inline-panel" id="rigidezPanel">
               <label>Escala de rigidez: <strong id="rigidezValue">5</strong>/10</label>
               <input type="range" min="0" max="10" value="5" oninput="actualizarValor('rigidezValue', this.value)">
+              <button class="confirm-btn" id="confirmRigidezBtn" type="button" onclick="confirmarSlider('rigidez')">
+                Confirmar rigidez 5/10
+              </button>
+              <div class="confirm-hint">
+                Si tu rigidez realmente es 5/10, confirma sin mover la barra.
+              </div>
             </div>
           </div>
 
@@ -1254,7 +1297,7 @@ body.no-scroll{
               <div class="chip-row">
                 <button type="button" class="chip" onclick="selectChip(this)">10 min</button>
                 <button type="button" class="chip" onclick="selectChip(this)">20 min</button>
-                <button type="button" class="chip" onclick="selectChip(this)">30 min</button>
+                <button type="button" class="chip" onclick="selectChip(this)">45 min</button>
               </div>
             </div>
           </div>
@@ -1508,13 +1551,15 @@ body.no-scroll{
   <script>
 
     const userState = {
-      dolor: null,
-  rigidez: null,
-  energia: "",
-  tiempo: "",
-  zona: "",
-  patologia: ""
-};
+      dolor: 5,
+      rigidez: 5,
+      dolorRespondido: false,
+      rigidezRespondido: false,
+      energia: "",
+      tiempo: "",
+      zona: "",
+      patologia: ""
+    };
 
     const zonasPorPanel = {
       cervicalPanel: "Cervical",
@@ -1662,8 +1707,103 @@ body.no-scroll{
       const el = document.getElementById(id);
       if(el) el.textContent = value;
 
-      if(id === "dolorValue") userState.dolor = Number(value);
-      if(id === "rigidezValue") userState.rigidez = Number(value);
+      if(id === "dolorValue"){
+        userState.dolor = Number(value);
+        userState.dolorRespondido = true;
+
+        const btn = document.getElementById("confirmDolorBtn");
+        if(btn){
+          btn.textContent = "Dolor respondido: " + value + "/10";
+          btn.classList.add("confirmed");
+        }
+      }
+
+      if(id === "rigidezValue"){
+        userState.rigidez = Number(value);
+        userState.rigidezRespondido = true;
+
+        const btn = document.getElementById("confirmRigidezBtn");
+        if(btn){
+          btn.textContent = "Rigidez respondida: " + value + "/10";
+          btn.classList.add("confirmed");
+        }
+      }
+    }
+
+    function confirmarSlider(tipo){
+      if(tipo === "dolor"){
+        const valor = document.getElementById("dolorValue").textContent;
+        userState.dolor = Number(valor);
+        userState.dolorRespondido = true;
+
+        const btn = document.getElementById("confirmDolorBtn");
+        if(btn){
+          btn.textContent = "Dolor confirmado: " + valor + "/10";
+          btn.classList.add("confirmed");
+        }
+      }
+
+      if(tipo === "rigidez"){
+        const valor = document.getElementById("rigidezValue").textContent;
+        userState.rigidez = Number(valor);
+        userState.rigidezRespondido = true;
+
+        const btn = document.getElementById("confirmRigidezBtn");
+        if(btn){
+          btn.textContent = "Rigidez confirmada: " + valor + "/10";
+          btn.classList.add("confirmed");
+        }
+      }
+    }
+
+    function respuestasCompletas(){
+      return (
+        userState.dolorRespondido === true &&
+        userState.rigidezRespondido === true &&
+        userState.energia !== "" &&
+        userState.tiempo !== ""
+      );
+    }
+
+    function mostrarAvisoCompletar(){
+      const resultZona = document.getElementById("resultZona");
+      const resultPatologia = document.getElementById("resultPatologia");
+      const resultTexto = document.getElementById("resultTexto");
+      const resultOverlay = document.getElementById("resultOverlay");
+      const contenedor = document.getElementById("rutinaContenido");
+
+      if(resultZona) resultZona.textContent = "Completa tu estado";
+      if(resultPatologia) resultPatologia.textContent = "Rutina bloqueada";
+
+      if(resultTexto){
+        const faltantes = [];
+
+        if(!userState.dolorRespondido) faltantes.push("Dolor");
+        if(!userState.rigidezRespondido) faltantes.push("Rigidez");
+        if(userState.energia === "") faltantes.push("Energía");
+        if(userState.tiempo === "") faltantes.push("Tiempo disponible");
+
+        resultTexto.innerHTML = `
+          Para desbloquear tu rutina personalizada primero completa:
+          <br><br>
+          ${faltantes.map(item => "• " + item).join("<br>")}
+          <br><br>
+          Luego vuelve a elegir la patología asociada a la articulación.
+        `;
+      }
+
+      if(contenedor){
+        contenedor.innerHTML = `
+          <div class="routine-summary">
+            Todavía falta información para calcular una rutina segura y adaptada a ti.
+          </div>
+        `;
+      }
+
+      closeAllZonePanels();
+
+      if(resultOverlay) resultOverlay.classList.add("active");
+      document.body.classList.add("no-scroll");
     }
 
     function selectChip(button){
@@ -1728,8 +1868,14 @@ body.no-scroll{
         estiramientos = estiramientos.slice(0, 2);
       }
 
-      if(tiempo === "30 min"){
-        central = [...central, "Pausa de control postural — 1 x 60 segundos"];
+      if(tiempo === "45 min"){
+        calentamiento = [...calentamiento, "Movilidad extra en rango cómodo — 1 x 6 por lado"];
+        central = [
+          ...central,
+          "Pausa de control postural — 1 x 60 segundos",
+          "Serie extra del ejercicio principal — 1 ronda adicional"
+        ];
+        estiramientos = [...estiramientos, "Estiramiento extra de la zona trabajada — 25 segundos"];
       }
 
       if(dolor >= 7){
@@ -1794,10 +1940,18 @@ body.no-scroll{
     }
 
     function openResult(zona, patologia){
+      if(!respuestasCompletas()){
+        mostrarAvisoCompletar();
+        return;
+      }
+
       const resultZona = document.getElementById("resultZona");
       const resultPatologia = document.getElementById("resultPatologia");
       const resultTexto = document.getElementById("resultTexto");
       const resultOverlay = document.getElementById("resultOverlay");
+
+      userState.zona = zona;
+      userState.patologia = patologia;
 
       const rutinaBase = getRutinaBase(zona, patologia);
       const rutinaAjustada = ajustarRutinaPorEstado(rutinaBase);
